@@ -10,19 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008172646) do
+ActiveRecord::Schema.define(version: 20171015170833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "blogs", force: :cascade do |t|
+  create_table "blogs", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.integer "status", default: 0
+    t.index ["slug"], name: "index_blogs_on_slug", unique: true
   end
 
-  create_table "portfolios", force: :cascade do |t|
+  create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "portfolios", id: :serial, force: :cascade do |t|
     t.string "title"
     t.string "subtitle"
     t.text "body"
@@ -32,7 +47,7 @@ ActiveRecord::Schema.define(version: 20171008172646) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "skills", force: :cascade do |t|
+  create_table "skills", id: :serial, force: :cascade do |t|
     t.string "title"
     t.integer "percent_utilized"
     t.datetime "created_at", null: false
