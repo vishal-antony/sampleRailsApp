@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'portfolio/:id', to: 'portfolios#show', as: 'portfolio_show'
 
   get 'about', to: 'pages#about'
-  get 'contact', to: 'page#contact'
+  get 'contact', to: 'pages#contact'
 
   resources :blogs do
     member do
