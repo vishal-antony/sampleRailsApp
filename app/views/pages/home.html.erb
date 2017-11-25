@@ -8,3 +8,13 @@
 <%= @skills.inspect %>
 
 <p><%= current_user.class %></p>
+
+<hr>
+
+<%= content_tag :p, class: "my-special-class" do %>
+  This is a paragraph tag
+<% end %>
+
+<hr>
+
+<%= sample_helper 'vishal antony is awesome' %>
