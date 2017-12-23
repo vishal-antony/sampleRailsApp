@@ -19,4 +19,8 @@ module ApplicationHelper
     greeting = "Thanks for visiting from #{session[:source]} and you are on the #{layout_name} layout"
     content_tag(:p, greeting, class: 'source-greeting') if session[:source]
   end
+
+  def copyright_generator
+    VantonyViewTool::Renderer.copyright('Vishal Antony', "All rights reserved")
+  end
 end
